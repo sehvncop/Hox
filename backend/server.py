@@ -31,7 +31,7 @@ async def landing_page():
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Landing page not found")
 
-@app.get("/download-extension")
+@app.get("/api/download-extension")
 async def download_extension():
     """Create and serve the extension zip file"""
     try:
