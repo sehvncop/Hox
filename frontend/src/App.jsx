@@ -107,7 +107,7 @@ function App() {
           <div className="mb-4">
             <p className="text-sm opacity-75 mb-2">Or download directly:</p>
             <a 
-              href={`${import.meta.env.REACT_APP_BACKEND_URL || 'http://localhost:8001'}/download-extension`}
+              href="/api/download-extension"
               download="gym-whatsapp-extension.zip"
               className="text-blue-300 hover:text-blue-100 underline text-sm"
             >
