@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="gymGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Dumbbell body -->
+  <rect x="18" y="28" width="28" height="8" rx="4" fill="url(#gymGradient)" />
+  
+  <!-- Left weight -->
+  <rect x="8" y="22" width="12" height="20" rx="6" fill="url(#gymGradient)" />
+  
+  <!-- Right weight -->
+  <rect x="44" y="22" width="12" height="20" rx="6" fill="url(#gymGradient)" />
+  
+  <!-- Grip lines -->
+  <line x1="22" y1="30" x2="22" y2="34" stroke="white" stroke-width="2" />
+  <line x1="26" y1="30" x2="26" y2="34" stroke="white" stroke-width="2" />
+  <line x1="30" y1="30" x2="30" y2="34" stroke="white" stroke-width="2" />
+  <line x1="34" y1="30" x2="34" y2="34" stroke="white" stroke-width="2" />
+  <line x1="38" y1="30" x2="38" y2="34" stroke="white" stroke-width="2" />
+  <line x1="42" y1="30" x2="42" y2="34" stroke="white" stroke-width="2" />
+  
+  <!-- Shine effect -->
+  <ellipse cx="14" cy="26" rx="4" ry="2" fill="rgba(255,255,255,0.3)" />
+  <ellipse cx="50" cy="26" rx="4" ry="2" fill="rgba(255,255,255,0.3)" />
+</svg>
