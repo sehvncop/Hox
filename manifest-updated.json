@@ -2,10 +2,10 @@
    "action": {
    },
    "background": {
-      "service_worker": "src/service-worker.js"
+      "service_worker": "service-worker.js"
    },
    "content_scripts": [ {
-      "js": [ "src/content.js" ],
+      "js": [ "content.js" ],
       "matches": [ "https://*.whatsapp.com/*", "https://*.whatsapprocket.io/*", "https://*.warocket.com/*", "https://*.rocketsend.io/*" ]
    } ],
    "default_locale": "en",
@@ -20,11 +20,10 @@
    "manifest_version": 3,
    "name": "__MSG_appName__",
    "permissions": [ "storage", "tabs", "activeTab" ],
-   "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "11.0.0",
    "web_accessible_resources": [ {
       "extension_ids": [  ],
       "matches": [ "<all_urls>" ],
-      "resources": [ "images/rocket_icon.svg", "images/star.svg", "images/stop_icon.svg", "images/gear_icon.svg", "images/rocket-send.gif", "audio/notification.mp3", "src/landing.html" ]
+      "resources": [ "images/rocket_icon.svg", "images/star.svg", "images/stop_icon.svg", "images/gear_icon.svg", "images/rocket-send.gif", "audio/notification.mp3", "landing.html" ]
    } ]
 }
