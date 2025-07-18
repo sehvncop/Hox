@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym WhatsApp Extension - Download</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+        }
+
+        .hero-icon {
+            font-size: 120px;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .download-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .download-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        .demo-key {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .demo-key h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .key-code {
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .instructions {
+            margin-top: 40px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .instructions h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            opacity: 0.7;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-icon">🏋️‍♂️</div>
+        <h1>Gym WhatsApp Extension</h1>
+        <p class="subtitle">Send bulk messages to your gym members via CSV upload</p>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">📋</div>
+                <h3>CSV Upload</h3>
+                <p>Upload your member list in CSV format and select the phone number column</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔐</div>
+                <h3>Secure Access</h3>
+                <p>Authentication required with key validation every 30 minutes</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Smart Messaging</h3>
+                <p>Custom messages with variables, AI rewriting, and random delays</p>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2 style="margin-bottom: 20px;">Download Extension</h2>
+            <p style="margin-bottom: 30px; opacity: 0.9;">
+                Download the Chrome extension and start sending personalized messages to your gym members
+            </p>
+            <a href="#" class="download-btn" onclick="downloadExtension()">
+                📥 Download Extension
+            </a>
+
+            <div class="demo-key">
+                <h3>Demo Authentication Key</h3>
+                <p>Use this key to test the extension:</p>
+                <div class="key-code">DEMO-KEY-2025</div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>Installation Instructions</h3>
+            <ol>
+                <li><strong>Download</strong> the extension file by clicking the button above</li>
+                <li><strong>Open Chrome</strong> and navigate to <code>chrome://extensions/</code></li>
+                <li><strong>Enable Developer Mode</strong> by toggling the switch in the top right</li>
+                <li><strong>Click "Load unpacked"</strong> and select the downloaded extension folder</li>
+                <li><strong>Go to WhatsApp Web</strong> and the extension will automatically appear</li>
+                <li><strong>Enter the demo key:</strong> <code>DEMO-KEY-2025</code></li>
+                <li><strong>Upload your CSV file</strong> and start sending messages!</li>
+            </ol>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Gym WhatsApp Extension | <a href="mailto:support@gymextension.com">Support</a></p>
+        </div>
+    </div>
+
+    <script>
+        function downloadExtension() {
+            // Create a temporary link to download the extension
+            const link = document.createElement('a');
+            link.href = '/gym-whatsapp-extension.zip';
+            link.download = 'gym-whatsapp-extension.zip';
+            link.click();
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('.feature');
+            features.forEach((feature, index) => {
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    feature.style.transition = 'all 0.6s ease';
+                    feature.style.opacity = '1';
+                    feature.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
