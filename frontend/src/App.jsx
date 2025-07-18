@@ -8,7 +8,8 @@ function App() {
     try {
       setDownloadStatus('Preparing download...');
       
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/download-extension`);
+      const backendUrl = import.meta.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+      const response = await fetch(`${backendUrl}/download-extension`);
       
       if (!response.ok) {
         throw new Error('Download failed');
