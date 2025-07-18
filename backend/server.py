@@ -54,7 +54,13 @@ async def download_extension():
         return FileResponse(
             zip_path,
             media_type="application/zip",
-            filename="gym-whatsapp-extension.zip"
+            filename="gym-whatsapp-extension.zip",
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET",
+                "Access-Control-Allow-Headers": "*",
+                "Cache-Control": "no-cache",
+            }
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error creating extension package: {str(e)}")
