@@ -1,0 +1,31 @@
+{
+   "action": {
+   },
+   "background": {
+      "service_worker": "main-service-worker.js"
+   },
+   "content_scripts": [ {
+      "js": [ "dist/content.bundle.js" ],
+      "matches": [ "https://*.whatsapp.com/*", "https://*.whatsapprocket.io/*", "https://*.warocket.com/*", "https://*.rocketsend.io/*" ]
+   } ],
+   "default_locale": "en",
+   "description": "__MSG_appDesc__",
+   "host_permissions": [ "https://*.whatsapp.com/*", "https://*.whatsapprocket.io/*", "https://*.rocketsend.io/*" ],
+   "icons": {
+      "128": "images/icons/icon128.png",
+      "16": "images/icons/icon16.png",
+      "32": "images/icons/icon32.png",
+      "48": "images/icons/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhkB6i4eEMFBykrleyoDL5szaMQdjTbly+pI9drIvHKIa6dhyObz/GrQY25LHVgnuIPsy3duao7IodHIohJBp5mfdg3enGFUpGGa20VZlMOBtXEqamdX1vdlEQj/rqHoukZsZ1kCna9hzyykKekSJNHt08NzSEYEFW5FJAR5cIPVoJxYnjiyIJOnQn1USZepbVzVabqEWaE1ao860LfZXZe7tqoTB1TZVExQoiPFiNibeAWz8CA6zvG+q07WQbV9L8rP2ML0Gu4eAo59MhZ8wZ4kK2VNf95/t4SAz9mprXvxb5cyxstc8+S/qvhMWo5mlDw76c29bDGc8SVj3n0Ea3wIDAQAB",
+   "manifest_version": 3,
+   "name": "__MSG_appName__",
+   "permissions": [ "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "10.19.0",
+   "web_accessible_resources": [ {
+      "extension_ids": [  ],
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "images/rocket_icon.svg", "images/star.svg", "images/stop_icon.svg", "images/gear_icon.svg", "images/rocket-send.gif", "audio/notification.mp3" ]
+   } ]
+}
