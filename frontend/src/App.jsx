@@ -8,7 +8,8 @@ function App() {
     try {
       setDownloadStatus('Preparing download...');
       
-      const backendUrl = import.meta.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+      // Use the same domain with /api prefix for backend calls
+      const backendUrl = import.meta.env.REACT_APP_BACKEND_URL || '/api';
       const response = await fetch(`${backendUrl}/download-extension`);
       
       if (!response.ok) {
