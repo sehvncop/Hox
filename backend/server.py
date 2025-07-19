@@ -1,38 +1,60 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
+#!/usr/bin/env python3
 import os
-import uvicorn
+from pathlib import Path
 
-app = FastAPI()
+try:
+    from fastapi import FastAPI, HTTPException
+    from fastapi.responses import FileResponse
+    import uvicorn
+except ImportError:
+    print("Installing required packages...")
+    os.system("pip install fastapi uvicorn")
+    from fastapi import FastAPI, HTTPException
+    from fastapi.responses import FileResponse
+    import uvicorn
+
+app = FastAPI(title="Gym Extension API", version="1.0.0")
 
 @app.get("/")
 async def root():
-    return {"message": "Gym WhatsApp Extension Backend", "status": "running"}
+    return {"message": "Gym WhatsApp Extension Backend", "status": "running", "version": "1.0.0"}
 
 @app.get("/api/health")
 async def health():
-    return {"status": "healthy", "version": "11.0.0"}
+    return {"status": "healthy", "version": "1.0.0"}
 
 @app.get("/api/download-extension")
 async def download_extension():
-    """Serve the gym extension zip file for download"""
-    extension_path = "/app/gym-whatsapp-extension.zip"
+    """Direct download of gym extension zip file"""
+    # Try multiple possible locations
+    possible_paths = [
+        "/app/backend/gym-whatsapp-extension.zip",
+        "/app/gym-whatsapp-extension.zip"
+    ]
     
-    if os.path.exists(extension_path):
+    extension_path = None
+    for path in possible_paths:
+        if os.path.exists(path):
+            extension_path = path
+            break
+    
+    if extension_path and os.path.exists(extension_path):
         return FileResponse(
             path=extension_path,
             filename="gym-whatsapp-extension.zip",
-            media_type="application/zip"
+            media_type="application/zip",
+            headers={"Content-Disposition": "attachment; filename=gym-whatsapp-extension.zip"}
         )
     else:
-        raise HTTPException(status_code=404, detail="Extension file not found")
+        raise HTTPException(status_code=404, detail="Extension file not found at any location")
 
 @app.get("/api/extension-info")
 async def extension_info():
     return {
         "name": "Gym WhatsApp Extension",
-        "version": "11.0.0",
+        "version": "1.0.0",
         "demo_key": "DEMO-KEY-2025",
+        "file_size": "1.3MB",
         "features": [
             "CSV Upload Support",
             "Authentication System", 
@@ -43,4 +65,4 @@ async def extension_info():
     }
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8001, reload=False)
