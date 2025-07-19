@@ -1,94 +1,56 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse, HTMLResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 import os
-import zipfile
-import shutil
-from pathlib import Path
+import uvicorn
 
-app = FastAPI(title="Gym WhatsApp Extension Landing Page")
+app = FastAPI()
 
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # In production, replace with specific origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+@app.get("/")
+async def root():
+    return {"message": "Gym WhatsApp Extension Backend", "status": "running"}
 
-@app.get("/", response_class=HTMLResponse)
-async def landing_page():
-    """Serve the landing page"""
-    try:
-        with open("/app/src/landing.html", "r") as f:
-            content = f.read()
-        return HTMLResponse(content=content)
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Landing page not found")
+@app.get("/api/health")
+async def health():
+    return {"status": "healthy", "version": "11.0.0"}
 
 @app.get("/api/download-extension")
 async def download_extension():
-    """Create and serve the extension zip file"""
-    try:
-        # Create a zip file of the build directory
-        zip_path = "/app/gym-whatsapp-extension.zip"
-        
-        # Remove existing zip if it exists
-        if os.path.exists(zip_path):
-            os.remove(zip_path)
-        
-        # Create zip file
-        with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
-            build_dir = Path("/app/build")
-            for file_path in build_dir.rglob("*"):
-                if file_path.is_file():
-                    # Add file to zip with relative path
-                    arcname = file_path.relative_to(build_dir.parent)
-                    zipf.write(file_path, arcname)
-        
+    """Serve the gym extension zip file for download"""
+    extension_path = "/app/gym-whatsapp-extension.zip"
+    if os.path.exists(extension_path):
         return FileResponse(
-            zip_path,
-            media_type="application/zip",
+            path=extension_path,
             filename="gym-whatsapp-extension.zip",
-            headers={
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET",
-                "Access-Control-Allow-Headers": "*",
-                "Cache-Control": "no-cache",
-            }
+            media_type="application/zip"
         )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error creating extension package: {str(e)}")
-
-@app.get("/api/health")
-async def health_check():
-    """Health check endpoint"""
-    return {"status": "healthy", "extension": "Gym WhatsApp Extension Landing Page"}
+    return {"error": "Extension file not found"}
 
 @app.get("/api/extension-info")
 async def extension_info():
-    """Get extension information"""
+    """Provide extension information"""
     return {
         "name": "Gym WhatsApp Extension",
         "version": "11.0.0",
-        "description": "Send bulk messages to your gym members via CSV upload",
         "demo_key": "DEMO-KEY-2025",
         "features": [
-            "CSV file upload for member lists",
-            "Secure key-based authentication",
-            "30-minute key validation intervals", 
-            "Custom message templates with variables",
-            "AI-powered message rewriting",
-            "Random delay between messages",
-            "Modern gym-themed UI"
+            "CSV Upload Support",
+            "Authentication System", 
+            "30-minute Sessions",
+            "WhatsApp Integration",
+            "Message Customization"
         ]
     }
 
 if __name__ == "__main__":
-    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8001)
