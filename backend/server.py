@@ -26,19 +26,19 @@ async def health():
 @app.get("/api/download-extension")
 async def download_extension():
     """Direct download of gym extension zip file"""
-    # Try multiple possible locations
-    possible_paths = [
-        "/app/backend/gym-whatsapp-extension.zip",
-        "/app/gym-whatsapp-extension.zip"
-    ]
+    # Create fixed extension if it doesn't exist
+    if not os.path.exists("/app/backend/gym-whatsapp-extension.zip"):
+        try:
+            import subprocess
+            result = subprocess.run(["python3", "/app/create_fixed_extension.py"], 
+                                  capture_output=True, text=True)
+            print(f"Extension creation result: {result.stdout}")
+        except Exception as e:
+            print(f"Error creating extension: {e}")
     
-    extension_path = None
-    for path in possible_paths:
-        if os.path.exists(path):
-            extension_path = path
-            break
+    extension_path = "/app/backend/gym-whatsapp-extension.zip"
     
-    if extension_path and os.path.exists(extension_path):
+    if os.path.exists(extension_path):
         return FileResponse(
             path=extension_path,
             filename="gym-whatsapp-extension.zip",
@@ -46,7 +46,7 @@ async def download_extension():
             headers={"Content-Disposition": "attachment; filename=gym-whatsapp-extension.zip"}
         )
     else:
-        raise HTTPException(status_code=404, detail="Extension file not found at any location")
+        raise HTTPException(status_code=404, detail="Extension file not found")
 
 @app.get("/api/extension-info")
 async def extension_info():
@@ -54,7 +54,6 @@ async def extension_info():
         "name": "Gym WhatsApp Extension",
         "version": "1.0.0",
         "demo_key": "DEMO-KEY-2025",
-        "file_size": "1.3MB",
         "features": [
             "CSV Upload Support",
             "Authentication System", 

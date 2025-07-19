@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "Gym WhatsApp Extension",
+  "version": "1.0.0",
+  "description": "CSV WhatsApp Sender with Authentication",
+  
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  
+  "content_scripts": [{
+    "js": ["content.bundle.js"],
+    "matches": [
+      "https://*.whatsapp.com/*"
+    ]
+  }],
+  
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  
+  "host_permissions": [
+    "https://*.whatsapp.com/*",
+    "https://api.placeholder.com/*"
+  ],
+  
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "32": "images/icons/icon32.png", 
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png"
+  },
+  
+  "web_accessible_resources": [{
+    "resources": [
+      "images/*.svg",
+      "images/*.gif", 
+      "audio/*.mp3",
+      "landing.html"
+    ],
+    "matches": ["<all_urls>"]
+  }],
+  
+  "action": {
+    "default_popup": "",
+    "default_title": "Gym WhatsApp Extension"
+  }
+}
