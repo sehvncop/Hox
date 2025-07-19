@@ -26,17 +26,7 @@ async def health():
 @app.get("/api/download-extension")
 async def download_extension():
     """Direct download of gym extension zip file"""
-    # Create fixed extension if it doesn't exist
-    if not os.path.exists("/app/backend/gym-whatsapp-extension.zip"):
-        try:
-            import subprocess
-            result = subprocess.run(["python3", "/app/create_fixed_extension.py"], 
-                                  capture_output=True, text=True)
-            print(f"Extension creation result: {result.stdout}")
-        except Exception as e:
-            print(f"Error creating extension: {e}")
-    
-    extension_path = "/app/backend/gym-whatsapp-extension.zip"
+    extension_path = "/app/gym-whatsapp-extension-fixed.zip"
     
     if os.path.exists(extension_path):
         return FileResponse(
