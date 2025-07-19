@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from fastapi.staticfiles import StaticFiles
 import os
 import uvicorn
 
@@ -10,7 +9,7 @@ app = FastAPI()
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -29,18 +28,6 @@ async def download_extension():
     """Serve the gym extension zip file for download"""
     extension_path = "/app/gym-whatsapp-extension.zip"
     
-    # Create extension if it doesn't exist
-    if not os.path.exists(extension_path):
-        try:
-            # Run the Python script to create the zip
-            import subprocess
-            result = subprocess.run(["python3", "/app/create_extension_zip.py"], 
-                                  capture_output=True, text=True)
-            if result.returncode != 0:
-                raise HTTPException(status_code=500, detail="Failed to create extension zip")
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=f"Error creating extension: {str(e)}")
-    
     if os.path.exists(extension_path):
         return FileResponse(
             path=extension_path,
@@ -52,7 +39,6 @@ async def download_extension():
 
 @app.get("/api/extension-info")
 async def extension_info():
-    """Provide extension information"""
     return {
         "name": "Gym WhatsApp Extension",
         "version": "11.0.0",
